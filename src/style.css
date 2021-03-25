@@ -1,1 +1,29 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+.card {
+  font-size: 4vw;
+}
+
+.bottomSymbol {
+  transform: rotate(180deg);
+}
+
+.number {
+  font-size: 8vw;
+}
+
+.diamond {
+  color: red;
+}
+
+.heart {
+  color: red;
+}
+
+.spade {
+  color: black;
+}
+
+.club {
+  color: black;
+}

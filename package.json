@@ -32,7 +32,9 @@
   "homepage": "https://github.com/4GeeksAcademy/vanillajs-hello#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
+    "fs": "0.0.1-security",
     "jquery": "^3.5.1",
+    "module": "^1.2.5",
     "popper.js": "^1.16.1"
   },
   "devDependencies": {
@@ -45,7 +47,7 @@
     "bc-webpack-error-reporting-plugin": "0.0.2",
     "clean-stack": "^3.0.1",
     "css-loader": "^3.5.1",
-    "error-overlay-webpack-plugin": "^0.2.0",
+    "error-overlay-webpack-plugin": "^0.4.2",
     "escape-string-regexp": "^1.0.5",
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
