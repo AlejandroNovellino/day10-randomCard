@@ -39,7 +39,7 @@ function generateCard(width = 12, height = 15) {
   let cardSuitSymbol = possiblesCardSuits[cardSuit];
 
   let card = document.querySelector("#card");
-  card.className = `card ${cardSuit} d-flex flex-column rounded-lg bg-white`;
+  card.className = `card ${cardSuit} d-flex flex-column rounded-lg bg-white mw-100 mh-100`;
   card.style["min-width"] = width + "rem";
   card.style["min-height"] = height + "rem";
   card.innerHTML = `
@@ -59,27 +59,40 @@ generateButton.addEventListener("click", () => {
   generateCard();
 });
 
+let timmerButtonClicked = false;
+let cancelCountdown = false;
 let timmerButton = document.querySelector("#timerButton");
 timmerButton.addEventListener("click", () => {
+  if (timmerButtonClicked) {
+    cancelCountdown = true;
+    return undefined;
+  }
+
+  timmerButtonClicked = true;
   let divTimeDisplay = document.querySelector("#timerDiv");
   let timer = 10;
   let displayTime = setInterval(() => {
     divTimeDisplay.innerHTML = timer < 10 ? `0${timer}` : `${timer}`;
     timer--;
-    timer === 0 && clearInterval(displayTime);
+    if (timer < 0 || cancelCountdown) {
+      !cancelCountdown && generateCard();
+      divTimeDisplay.innerHTML = "00";
+      cancelCountdown = false;
+      clearInterval(displayTime);
+      timmerButtonClicked = false;
+    }
   }, 1000);
-  setTimeout(generateCard, 10000);
-  setTimeout(() => {
-    divTimeDisplay.innerHTML = "00";
-  }, 11000);
 });
 
 let changeSize = document.querySelector("#changeSize");
 changeSize.addEventListener("click", () => {
-  generateCard(
-    parseInt(document.querySelector("#newWidth").value),
-    parseInt(document.querySelector("#newHeight").value)
-  );
+  let newWidth = parseInt(document.querySelector("#newWidth").value);
+  let newHeight = parseInt(document.querySelector("#newHeight").value);
+  //MaxWidth 80 and MaxHeight 40
+  newWidth = newWidth > 80 ? 80 : newWidth;
+  newHeight = newHeight > 40 ? 40 : newHeight;
+  generateCard(newWidth, newHeight);
+
   document.querySelector("#newWidth").value = "";
   document.querySelector("#newHeight").value = "";
 });
